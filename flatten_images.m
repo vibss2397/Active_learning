@@ -25,5 +25,5 @@ Xtrain = Xtrain2(:, :, idx(1:22000));
 Ytrain = Ytrain2(idx(1:22000));
 Xtest = Xtrain2(:, :, idx(22001:25000));
 Ytest = Ytrain2(idx(22001:25000));
-save dataset4.mat Xtrain Ytrain Xtest Ytest -v7.3;
+save dataset.mat Xtrain Ytrain Xtest Ytest -v7.3;
 
