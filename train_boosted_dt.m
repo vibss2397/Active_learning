@@ -4,7 +4,7 @@ function [alpha, learnerCell,tr_err] = train_boosted_dt(Xtr, ytr, T, learner)
     tr_err = zeros(T,1);
     alpha = zeros(T, 1);
     ytr2 = double(string(ytr));
-    if(learner=="tree")
+    if(learner=="linear")
         n = size(Xtr, 1);
     elseif(learner=="nn")
         n = size(Xtr, 1);
@@ -16,18 +16,19 @@ function [alpha, learnerCell,tr_err] = train_boosted_dt(Xtr, ytr, T, learner)
     dt = zeros(n, 1)+1/n;
     prev_error = 1;
     for t = 1:T
-      disp(['ada', num2str(t)]);
-      if(learner=="tree")
-        dt_temp = fitctree(Xtr, ytr2, 'MaxNumSplits',3,'Weights', dt); 
+      %disp(['ada', num2str(t)]);
+      if(learner=="linear")
+        indices = datasample((1:n), n, 'Weights', dt); 
+        dt_temp = fitclinear(Xtr(indices, :), ytr2(indices)); 
       elseif(learner=="nn")
         indices = datasample((1:n), n, 'Weights', dt);       
-        [dt_temp, nn_loss] = neural_train(Xtr(indices, :), ytr(indices), [256, 128], 200, 0.001);  
+        [dt_temp, nn_loss] = neural_train(Xtr(indices, :), ytr2(indices), [256, 128], 200, 0.001);  
       elseif(learner=="cnn")
         indices = datasample((1:n), n, 'Weights', dt);
-        [dt_temp, info] = cnn(Xtr(:, :, :, indices), ytr(indices), 10);
+        [dt_temp, info] = cnn(Xtr(:, :, :, indices), ytr2(indices), 10);
       end
       learnerCell{t} = dt_temp;
-      if(learner=="tree")
+      if(learner=="linear")
         answ = predict(dt_temp, Xtr);
       elseif(learner=="nn")
           probs = predict_net(dt_temp, Xtr);
@@ -47,7 +48,7 @@ function [alpha, learnerCell,tr_err] = train_boosted_dt(Xtr, ytr, T, learner)
       dt = dt/sum_dt;
       [final_outputs_tr, ~, ~] = test_boosted_dt(Xtr, alpha(1:t), learnerCell, learner);
       tr_err(t) = mean(final_outputs_tr~=ytr2);
-      disp(tr_err(t));
+      %disp(tr_err(t));
     end
         
     

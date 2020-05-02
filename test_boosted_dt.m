@@ -8,7 +8,7 @@ function [ypred, yprob, yprob_raw] = test_boosted_dt(Xte, alpha, DTCell, learner
     yprob = zeros(n, 1);
     yprob_raw = zeros(n, nb);
     for i = 1:nb
-      if(learner=="tree")
+      if(learner=="linear")
         answ = predict(DTCell{i}, Xte);
       elseif(learner=="nn")
          probs = predict_net(DTCell{i}, Xte);
