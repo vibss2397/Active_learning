@@ -7,4 +7,5 @@ The "flatten_images.m" file takes these images and creates a "dataset.mat" file 
         * The "neural_train.m" file trains a neural network, and "predict_net.m" gives the network's prediction.
             * The "cnn.m" file trains a convolutional neural network.
   <br />
-  The dataset in "dataset.mat" format is also available [here](https://gitlab.com/vibss2397/cats-vs-dogs)
+  The dataset in "dataset.mat" format is also available 
+[here](https://gitlab.com/vibss2397/cats-vs-dogs)
