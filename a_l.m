@@ -1,4 +1,4 @@
-%load('dataset.mat')
+load('dataset.mat')
 %Xtrain contains pixel values from 0 to 255, so normalizing them,
 %converting where y is -1 to 0, to be used by nn
 %Xtrain2 = (Xtrain2 - 127.5)/127.5;
@@ -38,7 +38,7 @@ for i=1:n_active
     
     acc(i) = mean(ypred_temp==ytrain_unlabelled);
     disp(acc(i));
-    %sum of all alphas which are ones and zeros,other alphas cancel ou
+    %sum of all alphas which are ones and zeros,other alphas cancel out
     [top_ypred, index] = mink(ypred_temp, k);
     %setting up labelled and unlabelled indices for the next iterations
     labelled_indices = [labelled_indices, index.'];
