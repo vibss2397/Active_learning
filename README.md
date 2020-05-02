@@ -6,5 +6,5 @@ The "flatten_images.m" file takes these images and creates a "dataset.mat" file 
     * The "train_boosted_dt.m" file trains AdaBoost, and "test_boosted_dt.m" tests it.
         * The "neural_train.m" file trains a neural network, and "predict_net.m" gives the network's prediction.
             * The "cnn.m" file trains a convolutional neural network.
- The dataset in "dataset.mat" format is also available at : 
- https://gitlab.com/vibss2397/cats-vs-dogs
+  <br />
+  The dataset in "dataset.mat" format is also available [here](https://gitlab.com/vibss2397/cats-vs-dogs)
